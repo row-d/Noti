@@ -15,11 +15,13 @@
     "@tauri-apps/api": "^1.2.0",
     "@tiptap/extension-document": "^2.0.0-beta.220",
     "@tiptap/extension-highlight": "^2.0.0-beta.220",
+    "@tiptap/extension-image": "^2.0.0-beta.220",
     "@tiptap/extension-placeholder": "^2.0.0-beta.220",
     "@tiptap/extension-typography": "^2.0.0-beta.220",
     "@tiptap/pm": "^2.0.0-beta.220",
     "@tiptap/react": "^2.0.0-beta.220",
     "@tiptap/starter-kit": "^2.0.0-beta.220",
+    "jotai": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

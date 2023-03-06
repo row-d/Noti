@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+#root {
+  @apply dark:bg-gray-700 dark:text-gray-300 font-sans overflow-hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+
+::selection {
+  @apply dark:bg-gray-300 dark:text-gray-700 bg-gray-400 text-gray-100;
+}
+
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply dark:bg-gray-900 bg-gray-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply dark:bg-gray-600 bg-gray-300 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply dark:bg-gray-500 bg-gray-400;
+}
+
+.ProseMirror {
+  @apply whitespace-pre-wrap prose dark:prose-invert prose-base md:prose-base lg:prose-lg xl:prose-2xl focus:outline-none outline-none outline-0 h-full p-0 m-0;
+}
+
+.ProseMirror .is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply float-left h-0 pointer-events-none dark:text-gray-400 text-gray-400;
+}
+
+.App {
+  @apply md:container md:mx-auto md:rounded border-collapse h-full max-h-full p-4 md:my-2 shadow-2xl dark:bg-gray-600 bg-gray-200 overflow-y-scroll;
+}

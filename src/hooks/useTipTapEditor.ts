@@ -1,49 +1,24 @@
-import ActionBar from "../components/ActionBar";
-import StarterKit from "@tiptap/starter-kit";
-import { Editor, useEditor } from "@tiptap/react";
-import Typography from "@tiptap/extension-typography";
-import Highlight from "@tiptap/extension-highlight";
-import Document from "@tiptap/extension-document";
-import Placeholder from "@tiptap/extension-placeholder";
 import { useEffect } from "react";
-import { useLocalStorage } from "./useLocalStorage";
+import { EditorOptions, JSONContent, useEditor } from "@tiptap/react";
+import { atomWithStorage } from "jotai/utils";
+import { useAtom } from "jotai";
 
 interface TipTapEditorProps {
   updateTime?: number;
+  tiptapConfig: Partial<EditorOptions>;
 }
 
+export const editorStorageAtom = atomWithStorage<
+  JSONContent | null | undefined
+>("editor", null);
+
 export function useTipTapEditor({
+  tiptapConfig,
   updateTime = 1000 * 60 * 2,
-}: TipTapEditorProps = {}) {
-  const CustomDocument = Document.extend({
-    content: "heading block*",
-  });
-  // TODO: Fix placeholder
-  const editor = useEditor({
-    extensions: [
-      CustomDocument,
-      StarterKit.configure({
-        document: false,
-      }),
-      Highlight,
-      Typography,
-      Placeholder.configure({
-        placeholder: ({ node }) => {
-          if (node.type.name === "heading") {
-            return "What’s the title?";
-          }
+}: TipTapEditorProps) {
+  const editor = useEditor(tiptapConfig);
 
-          return "Can you add some further context?";
-        },
-      }),
-    ],
-    injectCSS: false,
-  });
-
-  const [editorStorage, setEditorStorage] = useLocalStorage(
-    "editor",
-    editor?.getJSON()
-  );
+  const [editorStorage, setEditorStorage] = useAtom(editorStorageAtom);
 
   useEffect(() => {
     setInterval(() => setEditorStorage(editor?.getJSON()), updateTime);
